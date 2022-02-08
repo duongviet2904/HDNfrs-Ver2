@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Weather _weather;
+  var active = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -78,38 +79,43 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/icons/plus.png"),
-                                  fit: BoxFit.cover
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          active = 1;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: <Widget>[
+                            active == 1 ? Container(
+                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                                color: Colors.teal[50],
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Text("Thêm")
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                              color: Colors.teal[50],
-                            ),
-                            child: Container(
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/cucumber.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
+                                  ],
+                                ),
+                              ),
+                            ) : Container(
                               child: Column(
                                 children: [
                                   Container(
@@ -127,94 +133,250 @@ class _HomePageState extends State<HomePage> {
                                   SizedBox(height: 15,),
                                   Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
                                 ],
-                              ),
-                            ),
-                          ),
-                        ],
+                              )
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/icons/tomato.png"),
-                                  fit: BoxFit.cover
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          active = 2;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: <Widget>[
+                            active == 2 ? Container(
+                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                                color: Colors.red[50],
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
-                        ],
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/tomato.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
+                                  ],
+                                ),
+                              ),
+                            ) : Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/tomato.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
+                                  ],
+                                )
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/icons/grapes.png"),
-                                  fit: BoxFit.cover
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          active = 3;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: <Widget>[
+                            active == 3 ? Container(
+                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                                color: Colors.indigo[50],
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
-                        ],
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/grapes.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
+                                  ],
+                                ),
+                              ),
+                            ) : Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/grapes.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
+                                  ],
+                                )
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/icons/lemons.png"),
-                                  fit: BoxFit.cover
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          active = 4;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: <Widget>[
+                            active == 4 ? Container(
+                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                                color: Colors.lime[50],
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
-                        ],
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/lemons.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
+                                  ],
+                                ),
+                              ),
+                            ) : Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/lemons.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
+                                  ],
+                                )
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/icons/watermelon.png"),
-                                  fit: BoxFit.cover
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          active = 5;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: <Widget>[
+                            active == 5 ? Container(
+                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                                color: Colors.orange[50],
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 15,),
-                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
-                        ],
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/watermelon.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
+                                  ],
+                                ),
+                              ),
+                            ) : Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image: AssetImage("assets/images/icons/watermelon.png"),
+                                            fit: BoxFit.cover
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
+                                  ],
+                                )
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],),
@@ -225,8 +387,8 @@ class _HomePageState extends State<HomePage> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
-                  color: Colors.teal[50],
+                  // borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
+                  color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : Colors.orange[50]
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
