@@ -29,487 +29,515 @@ class _HomePageState extends State<HomePage> {
     var size = MediaQuery
         .of(context)
         .size;
-    return SafeArea(child: SingleChildScrollView(child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-      // padding: EdgeInsets.all(20),
+    return SafeArea(child: SingleChildScrollView(
       child: Column(
-
-        children: <Widget>[
+        children: [
           Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "HDNfrs",
-                    style: TextStyle(
-                        color: Colors.black38, fontSize: 22
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/HaUI.png"),
-                              fit: BoxFit.cover
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          "HDNfrs",
+                          style: TextStyle(
+                              color: Colors.black38, fontSize: 22
                           ),
-                          borderRadius: BorderRadius.circular(5),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(right: 0, left: 0),
-                  child: Divider(
-                    height: 25,
-                    color: Colors.black,
-                  )
-              )
-            ],
-          ),
-          // SizedBox(height: 40,),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: <Widget>[
-          //     Text("Top Designer",style: TextStyle(
-          //         fontSize: 30,
-          //         fontWeight: FontWeight.bold
-          //     ),),
-          //     SvgPicture.asset("assets/images/forward_icon.svg")
-          //   ],),
-          SizedBox(height: 30,),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/icons/plus.png"),
-                            fit: BoxFit.cover
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Thêm")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/icons/cucumber.png"),
-                              fit: BoxFit.cover
-                          ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Dưa chuột")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                          image: AssetImage("assets/images/icons/tomato.png"),
-                          fit: BoxFit.cover
-                      ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Cà chua")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/icons/grapes.png"),
-                              fit: BoxFit.cover
-                          ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Nho")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/icons/lemons.png"),
-                              fit: BoxFit.cover
-                          ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Chanh")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/icons/watermelon.png"),
-                            fit: BoxFit.cover
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Dưa hấu")
-                  ],
-                ),
-              ),
-            ],),
-
-          ),
-          //===================================================================
-          SizedBox(height: 20,),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.teal[50],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        width: (size.width / 4),
-                        height: 100,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white
-                        ),
-                        child: Column(
-                          children: [
+                        Row(
+                          children: <Widget>[
                             Container(
                               height: 30,
                               width: 30,
-                              alignment: Alignment.topLeft,
                               decoration: BoxDecoration(
-                                  // shape: BoxShape.circle,
-                                  // color: Colors.white38,
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/icons/fertilizer.png"),
-                                    fit: BoxFit.fill
-                                  )
+                                image: DecorationImage(
+                                    image: AssetImage("assets/HaUI.png"),
+                                    fit: BoxFit.cover
+                                ),
+                                borderRadius: BorderRadius.circular(5),
                               ),
                             ),
-                            SizedBox(height: 15,),
-                            Text("Tính toán \n phân bón", textAlign: TextAlign.left,)
                           ],
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(right: 0, left: 0),
+                        child: Divider(
+                          height: 25,
+                          color: Colors.black,
+                        )
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        width: (size.width / 4),
-                        height: 100,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 30,
-                              width: 30,
-                              alignment: Alignment.topLeft,
-                              decoration: BoxDecoration(
-                                  // shape: BoxShape.circle,
-                                  // color: Colors.white38,
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/icons/worm.png"),
-                                      fit: BoxFit.cover
-                                  )
+              ),
+              Padding(padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/icons/plus.png"),
+                                  fit: BoxFit.cover
                               ),
                             ),
-                            SizedBox(height: 15,),
-                            Text("Sâu hại và \n Bệnh cây", textAlign: TextAlign.left,)
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: 15,),
+                          Text("Thêm")
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        width: (size.width / 4),
-                        height: 100,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 30,
-                              width: 30,
-                              alignment: Alignment.topLeft,
-                              // padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  // shape: BoxShape.circle,
-                                  // color: Colors.grey,
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/icons/growth.png"),
-                                      fit: BoxFit.cover
-                                  )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(top: 5, left: 5, right: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
+                              color: Colors.teal[50],
+                            ),
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: AssetImage("assets/images/icons/cucumber.png"),
+                                          fit: BoxFit.cover
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
+                                ],
                               ),
                             ),
-                            SizedBox(height: 15,),
-                            Text("Mẹo canh tác", textAlign: TextAlign.left,)
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 30,),
-          Container(
-            // alignment: Alignment.topLeft,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("Kiểm tra bệnh cây trồng",style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/icons/tomato.png"),
+                                  fit: BoxFit.cover
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
+                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/icons/grapes.png"),
+                                  fit: BoxFit.cover
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
+                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/icons/lemons.png"),
+                                  fit: BoxFit.cover
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
+                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/icons/watermelon.png"),
+                                  fit: BoxFit.cover
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
+                          Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
+                        ],
+                      ),
+                    ),
                   ],),
-                SizedBox(height: 10,),
-                Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.teal[50],
-                  ),
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        // mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset("assets/images/icons/image.png", width: 65,),
-                          SizedBox(width: 10,),
-                          Image.asset("assets/images/icons/right.png", width: 30,),
-                          SizedBox(width: 10,),
-                          Image.asset("assets/images/icons/development.png", width: 55,),
-                          SizedBox(width: 10,),
-                          Image.asset("assets/images/icons/right.png", width: 30,),
-                          SizedBox(width: 10,),
-                          Image.asset("assets/images/icons/medicine.png", width: 55,),
-                        ],
-                      ),
-                      SizedBox(height: 20,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          FlatButton(
-                            child: Text(
-                              "Chọn ảnh",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16
-                              ),
-                            ),
-                            color: Colors.teal,
-                            onPressed: () => {},
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                          ),
 
-                          FlatButton(
-                            child: Text(
-                              "Chụp ảnh",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16
-                              ),
+                ),
+              ),
+              //===================================================================
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
+                  color: Colors.teal[50],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: (size.width / 4),
+                            height: 100,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white
                             ),
-                            color: Colors.teal,
-                            onPressed: () => {},
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.topLeft,
+                                  decoration: BoxDecoration(
+                                    // shape: BoxShape.circle,
+                                    // color: Colors.white38,
+                                      image: DecorationImage(
+                                          image: AssetImage("assets/images/icons/fertilizer.png"),
+                                          fit: BoxFit.fill
+                                      )
+                                  ),
+                                ),
+                                SizedBox(height: 15,),
+                                Text("Tính toán \n phân bón", textAlign: TextAlign.left,)
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: (size.width / 4),
+                            height: 100,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.topLeft,
+                                  decoration: BoxDecoration(
+                                    // shape: BoxShape.circle,
+                                    // color: Colors.white38,
+                                      image: DecorationImage(
+                                          image: AssetImage("assets/images/icons/worm.png"),
+                                          fit: BoxFit.cover
+                                      )
+                                  ),
+                                ),
+                                SizedBox(height: 15,),
+                                Text("Sâu hại và \n Bệnh cây", textAlign: TextAlign.left,)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: (size.width / 4),
+                            height: 100,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 30,
+                                  width: 30,
+                                  alignment: Alignment.topLeft,
+                                  // padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    // shape: BoxShape.circle,
+                                    // color: Colors.grey,
+                                      image: DecorationImage(
+                                          image: AssetImage("assets/images/icons/growth.png"),
+                                          fit: BoxFit.cover
+                                      )
+                                  ),
+                                ),
+                                SizedBox(height: 15,),
+                                Text("Mẹo canh tác", textAlign: TextAlign.left,)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30,),
+              Container(
+                // alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Kiểm tra bệnh cây trồng",style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                        ),),
+                      ],),
+                    SizedBox(height: 10,),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.teal[50],
+                      ),
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset("assets/images/icons/image.png", width: 65,),
+                              SizedBox(width: 10,),
+                              Image.asset("assets/images/icons/right.png", width: 30,),
+                              SizedBox(width: 10,),
+                              Image.asset("assets/images/icons/development.png", width: 55,),
+                              SizedBox(width: 10,),
+                              Image.asset("assets/images/icons/right.png", width: 30,),
+                              SizedBox(width: 10,),
+                              Image.asset("assets/images/icons/medicine.png", width: 55,),
+                            ],
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FlatButton(
+                                child: Text(
+                                  "Chọn ảnh",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16
+                                  ),
+                                ),
+                                color: Colors.teal,
+                                onPressed: () => {},
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                              ),
+
+                              FlatButton(
+                                child: Text(
+                                  "Chụp ảnh",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16
+                                  ),
+                                ),
+                                color: Colors.teal,
+                                onPressed: () => {},
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 30,),
+              Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Thời tiết",style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                        ),),
+                      ],),
+                    SizedBox(height: 10,),
+                    Container(
+                      child: FutureBuilder(
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot != null) {
+                            this._weather = snapshot.data;
+                            if (this._weather == null) {
+                              return Text("Error getting weather");
+                            } else {
+                              return  weatherBox(_weather);
+                            }
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                        future: getCurrentWeather(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30,),
+              Container(
+                padding: EdgeInsets.only(right: 20, left: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Thư viện ảnh",style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold
+                        ),),
+                        SvgPicture.asset("assets/images/forward_icon.svg")
+                      ],),
+                    SizedBox(height: 10,),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => Onboarding()));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage("assets/images/back.jpg"))
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              width: (MediaQuery.of(context).size.width - 70) / 2,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(image: AssetImage("assets/images/duachuot-back.jpg"),fit: BoxFit.cover)
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Container(
+                              width: (MediaQuery.of(context).size.width - 70) / 2,
+                              height: 230,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(image: AssetImage("assets/images/nho-back.jpg"),fit: BoxFit.cover)
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 20,),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              width: (MediaQuery.of(context).size.width - 70) / 2,
+                              height: 230,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(image: AssetImage("assets/images/cachua-back.jpg"),fit: BoxFit.cover)
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Container(
+                              width: (MediaQuery.of(context).size.width - 70) / 2,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(image: AssetImage("assets/images/suongmai.jpg"),fit: BoxFit.cover)
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
                 )
-              ],
-            ),
-          ),
-          SizedBox(height: 30,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Thời tiết",style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-              ),),
-            ],),
-          SizedBox(height: 10,),
-          Container(
-             child: FutureBuilder(
-               builder: (context, AsyncSnapshot snapshot) {
-                 if (snapshot != null) {
-                   this._weather = snapshot.data;
-                   if (this._weather == null) {
-                     return Text("Error getting weather");
-                   } else {
-                     return  weatherBox(_weather);
-                   }
-                 } else {
-                   return CircularProgressIndicator();
-                 }
-               },
-               future: getCurrentWeather(),
-             ),
-          ),
-          SizedBox(height: 30,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Thư viện ảnh",style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-              ),),
-              SvgPicture.asset("assets/images/forward_icon.svg")
-            ],),
-          SizedBox(height: 10,),
-          InkWell(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => Onboarding()));
-            },
-            child: Container(
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/images/back.jpg"))
               ),
-            ),
-          ),
-          SizedBox(height: 20,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 70) / 2,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(image: AssetImage("assets/images/duachuot-back.jpg"),fit: BoxFit.cover)
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 70) / 2,
-                    height: 230,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(image: AssetImage("assets/images/nho-back.jpg"),fit: BoxFit.cover)
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(width: 20,),
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 70) / 2,
-                    height: 230,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(image: AssetImage("assets/images/cachua-back.jpg"),fit: BoxFit.cover)
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 70) / 2,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(image: AssetImage("assets/images/suongmai.jpg"),fit: BoxFit.cover)
-                    ),
-                  ),
-                ],
-              )
             ],
-          )
+          ),
         ],
-      ),
-    ),));
+      ),)
+    );
   }
 
   Widget weatherBox(Weather _weather) {
@@ -642,3 +670,27 @@ class Clipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(Clipper oldClipper) => false;
 }
+//
+// class Clipper2 extends CustomClipper<Path> {
+//   @override
+//   Path getClip(Size size) {
+//     Path path = Path();
+//     path.moveTo(0, size.height - 20);
+//
+//     path.quadraticBezierTo((size.width / 6) * 1, (size.height / 2) + 15,
+//         (size.width / 3) * 1, size.height - 30);
+//
+//     path.lineTo(size.width, size.height - 60);
+//     path.lineTo(size.width, size.height);
+//     path.lineTo(0, size.height);
+//
+//     path.close();
+//
+//     return path;
+//   }
+//
+//   @override
+//   bool shouldReclip(covariant CustomClipper<Path> oldClipper){
+//     return true;
+//   }
+// }
