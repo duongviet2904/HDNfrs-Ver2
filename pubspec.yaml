@@ -50,6 +50,13 @@ dev_dependencies:
   flutter_svg: ^1.0.3
   weather: ^1.4.0
   http: ^0.12.1
+  animated_splash_screen: ^1.1.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icons/hdnbanner.png"
+
 #  image: ^3.0.1
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

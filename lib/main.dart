@@ -2,8 +2,10 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hdnfr_ver2/screens/onboarding.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hdnfr_ver2/screens/home_page.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:hdnfr_ver2/screens/root.dart';
 
 // void main() {
 //   runApp(
@@ -24,9 +26,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
     return MaterialApp(
-      title: 'Welcome to HDNFr!',
       debugShowCheckedModeBanner: false,
-      home: Onboarding(),
+      home: AnimatedSplashScreen(
+          splash: 'assets/images/icons/hdnbanner.png',
+          nextScreen: RootApp(),
+          splashTransition: SplashTransition.fadeTransition,
+          duration: 1000,
+          splashIconSize: 300,
+          // pageTransitionType: PageTransitionType.scale
+      ),
     );
   }
 }
