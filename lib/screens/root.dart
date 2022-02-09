@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/screens/diseasesInformation.dart';
 import 'package:hdnfr_ver2/screens/home_page.dart';
 import 'package:hdnfr_ver2/screens/landing_page.dart';
-import 'package:hdnfr_ver2/screens/onboarding.dart';
 
 
 class RootApp extends StatefulWidget {
@@ -26,7 +26,7 @@ class _RootAppState extends State<RootApp> {
   Widget getBody() {
     return IndexedStack(
       index: activeTab,
-      children: [HomePage(), LandingPage(), Onboarding()],
+      children: [HomePage(), LandingPage(), DiseasesInformation()],
     );
   }
 

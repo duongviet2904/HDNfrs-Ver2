@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hdnfr_ver2/extensions.dart';
 import 'package:hdnfr_ver2/models/weather.dart';
-import 'package:hdnfr_ver2/screens/onboarding.dart';
+import 'package:hdnfr_ver2/screens/diseasesInformation.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,6 +23,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(
+          "HDNfrs",
+          style: TextStyle(
+              color: Colors.black38, fontSize: 22
+          ),
+        ),
+        actions: <Widget>[
+          InkWell(
+            onTap: () => launch('https://sv.dhcnhn.vn/'),
+            child: Padding(padding: EdgeInsets.only(right: 10),
+              child: Image(image: AssetImage("assets/HaUI.png"), width: 40,),
+            ),
+          )
+        ],
+        backgroundColor: Colors.white,
+      ),
       body: getBody(),
     );
   }
@@ -35,46 +53,6 @@ class _HomePageState extends State<HomePage> {
         children: [
           Column(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          "HDNfrs",
-                          style: TextStyle(
-                              color: Colors.black38, fontSize: 22
-                          ),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("assets/HaUI.png"),
-                                    fit: BoxFit.cover
-                                ),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.only(right: 0, left: 0),
-                        child: Divider(
-                          height: 25,
-                          color: Colors.black,
-                        )
-                    )
-                  ],
-                ),
-              ),
               Padding(padding: EdgeInsets.only(top: 20, left: 20, right: 20),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -111,7 +89,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
+                                    // Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
+                                    Text("Dưa chuột"),
+                                    SizedBox(height: 10,),
                                   ],
                                 ),
                               ),
@@ -131,7 +111,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   SizedBox(height: 15,),
-                                  Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
+                                  Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),),
+                                  SizedBox(height: 10,),
                                 ],
                               )
                             )
@@ -171,7 +152,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),),
+                                    SizedBox(height: 10,),
+
                                   ],
                                 ),
                               ),
@@ -191,7 +174,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 )
                             )
@@ -231,7 +215,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 ),
                               ),
@@ -251,7 +236,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 )
                             )
@@ -291,7 +277,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 ),
                               ),
@@ -311,7 +298,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 )
                             )
@@ -351,7 +339,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 ),
                               ),
@@ -371,7 +360,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),)
+                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),),
+                                    SizedBox(height: 10,),
                                   ],
                                 )
                             )
@@ -388,7 +378,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   // borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
-                  color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : Colors.orange[50]
+                  color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : active == 5 ? Colors.orange[50] : Colors.grey[200]
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -429,39 +419,49 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            width: (size.width / 4),
-                            height: 100,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 30,
-                                  width: 30,
-                                  alignment: Alignment.topLeft,
-                                  decoration: BoxDecoration(
-                                    // shape: BoxShape.circle,
-                                    // color: Colors.white38,
-                                      image: DecorationImage(
-                                          image: AssetImage("assets/images/icons/worm.png"),
-                                          fit: BoxFit.cover
-                                      )
-                                  ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DiseasesInformation()),
+                        );
+                      },
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 0),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                width: (size.width / 4),
+                                height: 100,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white
                                 ),
-                                SizedBox(height: 15,),
-                                Text("Sâu hại và \n Bệnh cây", textAlign: TextAlign.left,)
-                              ],
-                            ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 30,
+                                      width: 30,
+                                      alignment: Alignment.topLeft,
+                                      decoration: BoxDecoration(
+                                        // shape: BoxShape.circle,
+                                        // color: Colors.white38,
+                                          image: DecorationImage(
+                                              image: AssetImage("assets/images/icons/worm.png"),
+                                              fit: BoxFit.cover
+                                          )
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Text("Sâu hại và \n Bệnh cây", textAlign: TextAlign.left,)
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                     Padding(
@@ -633,7 +633,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 10,),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => Onboarding()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => DiseasesInformation()));
                       },
                       child: Container(
                         width: double.infinity,
