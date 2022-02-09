@@ -1,8 +1,8 @@
 # hdnfr_ver2
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/89138046/153186650-fe2a5c7b-ef50-4fa7-a77d-4ae5210812d5.png" width="350px">
-  <img src="https://user-images.githubusercontent.com/89138046/153186762-9f58c412-2073-4b6b-87f9-950775bd1427.png" width="350px">
-  <img src="https://user-images.githubusercontent.com/89138046/153186873-a61e7ce3-a610-4ff3-9799-2e1480061b6f.png" width="350px">
+  <img src="https://user-images.githubusercontent.com/89138046/153186650-fe2a5c7b-ef50-4fa7-a77d-4ae5210812d5.png" width="200px">
+  <img src="https://user-images.githubusercontent.com/89138046/153186762-9f58c412-2073-4b6b-87f9-950775bd1427.png" width="200px">
+  <img src="https://user-images.githubusercontent.com/89138046/153186873-a61e7ce3-a610-4ff3-9799-2e1480061b6f.png" width="200px">
 </p>
 
 ## Getting Started
