@@ -1,9 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
-import 'package:hdnfr_ver2/screens/diseasesInformation.dart';
+import 'package:hdnfr_ver2/screens/googleMap.dart';
 import 'package:hdnfr_ver2/screens/home_page.dart';
 import 'package:hdnfr_ver2/screens/landing_page.dart';
+import 'package:hdnfr_ver2/screens/plant_list.dart';
+import 'package:hdnfr_ver2/screens/profile.dart';
+
+import '../plantData.dart';
 
 
 class RootApp extends StatefulWidget {
@@ -13,6 +17,7 @@ class RootApp extends StatefulWidget {
 
 class _RootAppState extends State<RootApp> {
   int activeTab = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +31,7 @@ class _RootAppState extends State<RootApp> {
   Widget getBody() {
     return IndexedStack(
       index: activeTab,
-      children: [HomePage(), LandingPage(), DiseasesInformation()],
+      children: [HomePage(), MapSample(), Profile()],
     );
   }
 

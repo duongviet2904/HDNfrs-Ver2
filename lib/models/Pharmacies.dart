@@ -8,11 +8,11 @@ class Pharmacies {
   LatLng locationCoords;
 
   Pharmacies(
-      {this.shopName,
-        this.address,
-        this.description,
-        this.thumbNail,
-        this.locationCoords});
+      {required this.shopName,
+        required this.address,
+        required this.description,
+        required this.thumbNail,
+        required this.locationCoords});
 }
 
 final List<Pharmacies> pharmaciesLocation = [
