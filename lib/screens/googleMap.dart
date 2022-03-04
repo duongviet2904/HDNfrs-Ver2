@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'Pharmacies.dart';
+import 'package:hdnfr_ver2/models/Pharmacies.dart';
 
 class MapSample extends StatefulWidget {
   @override
@@ -11,13 +11,13 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
-  GoogleMapController _controller;
+  late GoogleMapController _controller;
 
   List<Marker> allMarkers = [];
 
-  PageController _pageController;
+  late PageController _pageController;
 
-  int prevPage;
+  late int prevPage;
 
   @override
   void initState() {
@@ -36,8 +36,8 @@ class MapSampleState extends State<MapSample> {
   }
 
   void _onScroll() {
-    if (_pageController.page.toInt() != prevPage) {
-      prevPage = _pageController.page.toInt();
+    if (_pageController.page!.toInt() != prevPage) {
+      prevPage = _pageController.page!.toInt();
       moveCamera();
     }
   }
@@ -45,10 +45,10 @@ class MapSampleState extends State<MapSample> {
   _coffeeShopList(index) {
     return AnimatedBuilder(
       animation: _pageController,
-      builder: (BuildContext context, Widget widget) {
+      builder: (BuildContext context, Widget? widget) {
         double value = 1;
         if (_pageController.position.haveDimensions) {
-          value = _pageController.page - index;
+          value = _pageController.page! - index;
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
         return Center(
@@ -159,29 +159,30 @@ class MapSampleState extends State<MapSample> {
                 ),
               ),
             ),
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                    child: OutlinedButton(
-                      style: ElevatedButton.styleFrom(
-                        side: BorderSide(width: 3.0, color: Colors.black),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0),
-                        ),
-                      ),
-                      child: new Icon(Icons.arrow_back, color: Colors.black,),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Positioned(
+            //   top: 10,
+            //   left: 10,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       InkWell(
+            //         onTap: (){
+            //           Navigator.pop(context);
+            //         },
+            //         child: OutlinedButton(
+            //           style: ElevatedButton.styleFrom(
+            //             side: BorderSide(width: 3.0, color: Colors.black),
+            //             shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(100.0),
+            //             ),
+            //           ),
+            //           onPressed: () {  },
+            //           child: new Icon(Icons.arrow_back, color: Colors.black,),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ));
   }
@@ -194,7 +195,7 @@ class MapSampleState extends State<MapSample> {
 
   moveCamera() {
     _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: pharmaciesLocation[_pageController.page.toInt()].locationCoords,
+        target: pharmaciesLocation[_pageController.page!.toInt()].locationCoords,
         zoom: 14.0,
         bearing: 45.0,
         tilt: 45.0)));

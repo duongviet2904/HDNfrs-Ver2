@@ -3,6 +3,9 @@
    <application
         android:label="hdnfr_ver2"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCvSQQi4Xh83qPbJhrBmgaC19L5GdZFlEs"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

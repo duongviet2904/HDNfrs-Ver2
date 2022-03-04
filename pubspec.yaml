@@ -51,6 +51,7 @@ dev_dependencies:
   weather: ^1.4.0
   http: ^0.12.1
   animated_splash_screen: ^1.1.0
+  google_maps_flutter: ^0.5.33
 
 flutter_icons:
   android: "launcher_icon"

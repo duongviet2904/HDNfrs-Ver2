@@ -3,11 +3,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hdnfr_ver2/extensions.dart';
+import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/models/plant.dart';
+// import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
 import 'package:hdnfr_ver2/models/weather.dart';
 import 'package:hdnfr_ver2/screens/diseasesInformation.dart';
+import 'package:hdnfr_ver2/screens/plant_list.dart';
+import 'package:hdnfr_ver2/widget/home_plant_list_widget.dart';
+import 'package:hdnfr_ver2/widget/plant_list_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 import 'package:url_launcher/url_launcher.dart';
+import "package:hdnfr_ver2/screens/plant_list.dart" as listPlant;
+
+import '../plantData.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Weather _weather;
   var active = 0;
+  var backColor = "Colors.grey[200]";
 
   @override
   Widget build(BuildContext context) {
@@ -44,341 +54,75 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget buildItem(item, int index, Animation<double> animation) =>
+      HomePlantListWidget(
+        item: item,
+        onClicked: () => {active = item.id},
+      );
   Widget getBody(){
     var size = MediaQuery
         .of(context)
         .size;
+    final items = List.from(PlantData.PlanDataList);
+    final plantList = List.from(PlantData.PlanDataList);
+    final key = GlobalKey<AnimatedListState>();
+
     return SafeArea(child: SingleChildScrollView(
       child: Column(
         children: [
           Column(
             children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              Padding(padding: EdgeInsets.only(right: 15),
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: <Widget>[
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          active = 1;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: <Widget>[
-                            active == 1 ? Container(
-                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                                color: Colors.teal[50],
-                              ),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/cucumber.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    // Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),)
-                                    Text("Dưa chuột"),
-                                    SizedBox(height: 10,),
-                                  ],
-                                ),
-                              ),
-                            ) : Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          image: AssetImage("assets/images/icons/cucumber.png"),
-                                          fit: BoxFit.cover
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 15,),
-                                  Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa chuột"),),
-                                  SizedBox(height: 10,),
-                                ],
-                              )
-                            )
-                          ],
-                        ),
-                      ),
+                  // scrollDirection: Axis.horizontal,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10),
+                    height: 122,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
                     ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          active = 2;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: <Widget>[
-                            active == 2 ? Container(
-                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                                color: Colors.red[50],
-                              ),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/tomato.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),),
-                                    SizedBox(height: 10,),
-
-                                  ],
-                                ),
-                              ),
-                            ) : Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/tomato.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Cà chua"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                )
-                            )
-                          ],
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: AnimatedList(
+                            scrollDirection: Axis.horizontal,
+                            key: key,
+                            initialItemCount: items.length,
+                            itemBuilder: (context, index, animation) =>
+                                buildItem(items[index], index, animation),
+                          ),
                         ),
-                      ),
+                        InkWell(
+                          child: Container(
+                            width: 60,
+                            height: 40,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              // color: Colors.grey[100],
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.black, width: 2)
+                            ),
+                            child: Image.asset("assets/images/icons/plus.png", width: 35,),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MainPage(title: 'Chọn cây trồng',)));
+                          },
+                        )
+                      ],
                     ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          active = 3;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: <Widget>[
-                            active == 3 ? Container(
-                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                                color: Colors.indigo[50],
-                              ),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/grapes.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                ),
-                              ),
-                            ) : Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/grapes.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Nho"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                )
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          active = 4;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: <Widget>[
-                            active == 4 ? Container(
-                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                                color: Colors.lime[50],
-                              ),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/lemons.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                ),
-                              ),
-                            ) : Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/lemons.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Chanh"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                )
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          active = 5;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: <Widget>[
-                            active == 5 ? Container(
-                              padding: EdgeInsets.only(top: 5, left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(50)),
-                                color: Colors.orange[50],
-                              ),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/watermelon.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                ),
-                              ),
-                            ) : Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: AssetImage("assets/images/icons/watermelon.png"),
-                                            fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Padding(padding: EdgeInsets.only(right: 5, left: 5), child: Text("Dưa hấu"),),
-                                    SizedBox(height: 10,),
-                                  ],
-                                )
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],),
-
+                  ),
                 ),
               ),
               //===================================================================
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
+
                   // borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
                   color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : active == 5 ? Colors.orange[50] : Colors.grey[200]
+                  // color: backColor
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -523,6 +267,14 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.teal[50],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: Offset(0, 1), // changes position of shadow
+                          ),
+                        ],
                       ),
                       child: Column(
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -710,7 +462,16 @@ class _HomePageState extends State<HomePage> {
         height: 160.0,
         decoration: BoxDecoration(
             color: Colors.indigoAccent,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 4,
+                offset: Offset(0, 1), // changes position of shadow
+              ),
+            ],
+        ),
       ),
       ClipPath(
           clipper: Clipper(),
@@ -832,6 +593,7 @@ class Clipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(Clipper oldClipper) => false;
 }
+
 //
 // class Clipper2 extends CustomClipper<Path> {
 //   @override
