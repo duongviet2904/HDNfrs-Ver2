@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hdnfr_ver2/json/Diseases.dart';
+// import 'package:hdnfr_ver2/json/Diseases.dart';
+import 'package:hdnfr_ver2/models/disease.dart';
 import 'detail.dart';
 
 class DiseasesInformation extends StatelessWidget {
+
+  final List<Disease> diseases;
+  const DiseasesInformation({
+    required this.diseases,
+    Key? key,
+  }) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -35,10 +44,10 @@ class DiseasesInformation extends StatelessWidget {
                     padding: sidePadding,
                     child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: RE_DATA.length,
+                        itemCount: diseases.length,
                         itemBuilder: (context, index) {
                           return RealEstateItem(
-                            itemData: RE_DATA[index],
+                            itemData: diseases[index],
                           );
                         }),
                   ),
@@ -53,9 +62,9 @@ class DiseasesInformation extends StatelessWidget {
 }
 
 class RealEstateItem extends StatelessWidget {
-  final dynamic itemData;
+  final Disease itemData;
 
-  const RealEstateItem({Key? key, this.itemData}) : super(key: key);
+  const RealEstateItem({Key? key, required this.itemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,14 +104,14 @@ class RealEstateItem extends StatelessWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                          Text("${itemData["name"]}",style: TextStyle(
+                                          Text(itemData.name,style: TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold
                                           ),),
                                         ],),
                                     ),
                                     Padding(padding: EdgeInsets.only(right: 10, left: 10),
-                                      child: DescriptionTextWidget(text: '${itemData["symptom"]}',),
+                                      child: DescriptionTextWidget(text: itemData.symptom,),
                                     ),
                                     SizedBox(height: 10,),
                                     Row(
@@ -115,7 +124,7 @@ class RealEstateItem extends StatelessWidget {
                                               height: 100,
                                               decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
-                                                  image: DecorationImage(image: AssetImage("${itemData["relatedImage3"]}"),fit: BoxFit.cover)
+                                                  image: DecorationImage(image: AssetImage(itemData.relatedImage1),fit: BoxFit.cover)
                                               ),
                                             ),
                                           ],

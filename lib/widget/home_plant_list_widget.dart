@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class HomePlantListWidget extends StatelessWidget {
   final Plant item;
+  final List<Plant> lstPlant;
   final VoidCallback? onClicked;
 
   const HomePlantListWidget({
     required this.item,
+    required this.lstPlant,
     this.onClicked,
     Key? key,
   }) : super(key: key);
@@ -24,8 +26,9 @@ class HomePlantListWidget extends StatelessWidget {
               height: 60,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                // color: Colors.grey[100],
                 shape: BoxShape.circle,
+                border: Border.all(color: Colors.grey.shade200)
               ),
               child: Image.asset(item.imageUrl, width: 35,),
             ),

@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:hdnfr_ver2/models/disease.dart';
 
 class DetailPage extends StatelessWidget {
-  final dynamic itemData;
+  final Disease itemData;
 
-  const DetailPage({Key? key,@required this.itemData}) : super(key: key);
+  const DetailPage({Key? key,required this.itemData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class DetailPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white70,
-        title: Text("${itemData["name"]}",
+        title: Text(itemData.name,
           style: TextStyle(
             color: Colors.black
           ),
@@ -31,7 +32,7 @@ class DetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("${itemData["name"]}", style:
+                        Text(itemData.name, style:
                         TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30)
                           ,),
                         SizedBox(height: 30,),
@@ -40,10 +41,10 @@ class DetailPage extends StatelessWidget {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
-                              makeVideo(image: '${itemData["relatedImage1"]}'),
-                              makeVideo(image: '${itemData["relatedImage2"]}'),
-                              makeVideo(image: '${itemData["relatedImage3"]}'),
-                              makeVideo(image: '${itemData["relatedImage4"]}'),
+                              makeVideo(image: itemData.relatedImage1),
+                              makeVideo(image: itemData.relatedImage2),
+                              makeVideo(image: itemData.relatedImage3),
+                              makeVideo(image: itemData.relatedImage4),
                             ],
                           ),
                         ),
@@ -51,19 +52,19 @@ class DetailPage extends StatelessWidget {
                             Text("Triệu chứng", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)
                         ,
                         SizedBox(height: 10,),
-                        Text("${itemData["symptom"]}",
+                        Text(itemData.symptom,
                           style: TextStyle(color: Colors.black54, height: 1.4),),
                         SizedBox(height: 20,),
                             Text("Nguyên nhân và đặc điểm phát sinh bệnh", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)
                         ,
                         SizedBox(height: 10,),
-                        Text("${itemData["reason"]}",
+                        Text(itemData.reason,
                           style: TextStyle(color: Colors.black54, height: 1.4),),
                         SizedBox(height: 20,),
                             Text("Biện pháp phòng trừ", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)
                         ,
                         SizedBox(height: 10,),
-                        Text("${itemData["solution"]}",
+                        Text(itemData.solution,
                           style: TextStyle(color: Colors.black54, height: 1.4),),
                         SizedBox(height: 20,),
                       ],

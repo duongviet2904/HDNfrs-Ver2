@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/models/plant.dart';
 import 'package:hdnfr_ver2/screens/googleMap.dart';
 import 'package:hdnfr_ver2/screens/home_page.dart';
 import 'package:hdnfr_ver2/screens/landing_page.dart';
@@ -11,12 +12,17 @@ import '../plantData.dart';
 
 
 class RootApp extends StatefulWidget {
+  final List<Plant> lstPlant;
+  // final GlobalKey<_RootAppState> key = GlobalKey();
+  RootApp({Key? key, required this.lstPlant}): super(key: key);
   @override
   _RootAppState createState() => _RootAppState();
+
 }
 
 class _RootAppState extends State<RootApp> {
   int activeTab = 0;
+  // final GlobalKey<_RootAppState> key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class _RootAppState extends State<RootApp> {
   Widget getBody() {
     return IndexedStack(
       index: activeTab,
-      children: [HomePage(), MapSample(), Profile()],
+      children: [HomePage(lstPlant: widget.lstPlant,), MapSample(), Profile()],
     );
   }
 

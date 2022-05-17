@@ -2,21 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hdnfr_ver2/models/plant.dart';
 import 'package:hdnfr_ver2/plantData.dart';
+import 'package:hdnfr_ver2/screens/root.dart';
 import 'package:hdnfr_ver2/widget/choosing_plant_widget.dart';
 import 'package:hdnfr_ver2/widget/plant_list_widget.dart';
 
 import 'diseasesInformation.dart';
+import 'home_page.dart';
 
 class MainPage extends StatefulWidget {
   final String title;
+  // final List<Plant> lstPlant; 
   // final List<Plant> items;
   // final List<Plant> plantList;
-
+  final List<Plant> items;
   const MainPage({
-    required this.title,
+    Key? key,
+    required this.title, required this.items,
     // required this.plantList,
     // required this.items
-  });
+  }):super(key: key);
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -24,7 +28,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final key = GlobalKey<AnimatedListState>();
-  final items = List.from(PlantData.PlanDataList);
+  
   final plantList = List.from(PlantData.PlanDataList);
 
   @override
@@ -34,6 +38,24 @@ class _MainPageState extends State<MainPage> {
       title: Text(widget.title, style: TextStyle(
         color: Colors.black
       ),),
+      actions: [
+        FlatButton (
+          child: Text(
+            "Lưu",
+              style: TextStyle(
+                  fontSize: 18
+              ),
+            ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RootApp(lstPlant: widget.items)),
+            );
+          },
+          color: Colors.white,
+          textColor: Colors.black,
+        )
+      ],
       backgroundColor: Colors.white,
       automaticallyImplyLeading: true,
       foregroundColor: Colors.black,
@@ -80,9 +102,9 @@ class _MainPageState extends State<MainPage> {
                   child: AnimatedList(
                     scrollDirection: Axis.horizontal,
                     key: key,
-                    initialItemCount: items.length,
+                    initialItemCount: widget.items.length,
                     itemBuilder: (context, index, animation) =>
-                        buildItem(items[index], index, animation),
+                        buildItem(widget.items[index], index, animation),
                   ),
                 ),
               ],
@@ -92,25 +114,25 @@ class _MainPageState extends State<MainPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              buildItem2(plantList[0], 0),
-              buildItem2(plantList[1], 1),
-              buildItem2(plantList[2], 2),
+              buildItem2(plantList[0], ),
+              buildItem2(plantList[1], ),
+              buildItem2(plantList[2], ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              buildItem2(plantList[3], 3),
-              buildItem2(plantList[4], 4),
-              buildItem2(plantList[5], 5),
+              buildItem2(plantList[3], ),
+              buildItem2(plantList[4], ),
+              buildItem2(plantList[5], ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              buildItem2(plantList[6], 6),
-              buildItem2(plantList[7], 7),
-              buildItem2(plantList[8], 8),
+              buildItem2(plantList[6], ),
+              buildItem2(plantList[7], ),
+              buildItem2(plantList[8], ),
             ],
           )
           // SingleChildScrollView(
@@ -129,10 +151,10 @@ class _MainPageState extends State<MainPage> {
     )
   );
 
-  Widget buildItem2(item, int index) =>
+  Widget buildItem2(item) =>
       ChoosingPantWidget(
         item: item,
-        onClicked: () => insertItem(index, item),
+        onClicked: () => insertItem(item),
       );
 
   Widget buildItem(item, int index, Animation<double> animation) =>
@@ -141,18 +163,23 @@ class _MainPageState extends State<MainPage> {
         onClicked: () => removeItem(index),
       );
 
-  void insertItem(int index, Plant item) {
-    for(int i = 0; i < items.length; i++){
-      if(items[i].id == item.id){
-        return;
+  void insertItem(Plant item) {
+    if(widget.items.isEmpty){
+      widget.items.add(item);
+      key.currentState!.insertItem(0);
+    }else {
+      for (int i = 0; i < widget.items.length; i++) {
+        if (widget.items[i].id == item.id) {
+          return;
+        }
       }
+      widget.items.add(item);
+      key.currentState!.insertItem(widget.items.length - 1);
     }
-    items.insert(index, item);
-    key.currentState!.insertItem(index);
   }
 
   void removeItem(int index) {
-    final item = items.removeAt(index);
+    final item = widget.items.removeAt(index);
     key.currentState!.removeItem(
       index,
           (context, animation) => buildItem(item, index, animation),

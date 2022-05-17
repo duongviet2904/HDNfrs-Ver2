@@ -1,24 +1,43 @@
+import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hdnfr_ver2/diseasesData.dart';
 import 'package:hdnfr_ver2/extensions.dart';
-import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
-import 'package:hdnfr_ver2/models/plant.dart';
-// import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/models/disease.dart';
 import 'package:hdnfr_ver2/models/weather.dart';
 import 'package:hdnfr_ver2/screens/diseasesInformation.dart';
-import 'package:hdnfr_ver2/screens/plant_list.dart';
-import 'package:hdnfr_ver2/widget/home_plant_list_widget.dart';
-import 'package:hdnfr_ver2/widget/plant_list_widget.dart';
+import 'package:hdnfr_ver2/screens/result_detail.dart';
+import 'package:hdnfr_ver2/screens/result_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 import 'package:url_launcher/url_launcher.dart';
-import "package:hdnfr_ver2/screens/plant_list.dart" as listPlant;
+import 'package:image/image.dart' as img;
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
+
+
+
+import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/models/plant.dart';
+// import 'package:hdnfr_ver2/json/JSON_ROOT.dart';
+import 'package:hdnfr_ver2/screens/plant_list.dart';
+import 'package:hdnfr_ver2/widget/home_plant_list_widget.dart';
+import 'package:hdnfr_ver2/widget/plant_list_widget.dart';
+import "package:hdnfr_ver2/screens/plant_list.dart" as listPlant;
 import '../plantData.dart';
 
+
 class HomePage extends StatefulWidget {
+  final List<Plant> lstPlant;
+
+  const HomePage({Key? key, required this.lstPlant}):super(key : key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,6 +46,52 @@ class _HomePageState extends State<HomePage> {
   late Weather _weather;
   var active = 0;
   var backColor = "Colors.grey[200]";
+  final List<Disease> diseasesData = List.from(DiseasesData.diseasesList);
+  // final List<Plant> lstPlant = <Plant>[];
+  File? _image;
+  final picker = ImagePicker();
+  Image? _imageWidget;
+
+  String base64str = '';
+  String benh1st = "", benh2nd = "", benh3rd = "";
+  double tile1 = 0, tile2 = 0, tile3 = 0;
+
+  //ảnh bst
+  Future getImage() async {
+    print('goi hàm getImage');
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      _image = File(pickedFile!.path);
+      _imageWidget = Image.file(_image!);
+      List<int> imageBytes = _image!.readAsBytesSync();
+      base64str = base64Encode(imageBytes);
+
+      // _predict();
+    });
+    // print(base64str);
+  }
+
+  //máy ảnh
+  Future getImage_camera() async {
+    print('goi hàm getImage_camera');
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      _image = File(pickedFile!.path);
+      _imageWidget = Image.file(_image!);
+      List<int> imageBytes = _image!.readAsBytesSync();
+      base64str = base64Encode(imageBytes);
+
+      // _predict();
+    });
+  }
+
+  Future<String> convert_image_to_base64(String path) async {
+    final File file = File(path);
+    Uint8List bytes = await file.readAsBytes();
+
+    String array_string = base64Encode(bytes);
+    return array_string;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +99,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "HDNfrs",
           style: TextStyle(
@@ -57,13 +123,41 @@ class _HomePageState extends State<HomePage> {
   Widget buildItem(item, int index, Animation<double> animation) =>
       HomePlantListWidget(
         item: item,
+        lstPlant: widget.lstPlant,
         onClicked: () => {active = item.id},
       );
+
+  Widget resultPage(benh1st, benh2nd, benh3rd) {
+    List<Disease> dataOfResult = [];
+    final diseasesData = List.from(DiseasesData.diseasesList);
+    for(int i = 0; i < diseasesData.length; i++) {
+      if (benh1st == diseasesData[i].name) {
+        dataOfResult.add(diseasesData[i]);
+        break;
+      }
+    }
+    for (int i = 0; i < diseasesData.length; i++) {
+      if (benh2nd == diseasesData[i].name) {
+        dataOfResult.add(diseasesData[i]);
+        break;
+      }
+    }
+    for (int i = 0; i < diseasesData.length; i++) {
+      if (benh3rd == diseasesData[i].name) {
+        dataOfResult.add(diseasesData[i]);
+        break;
+      }
+    }
+
+    if (tile1 >= 95.00) return ResultDetailPage(itemData: dataOfResult[0], diseases: dataOfResult,);
+    return ResultPage(diseases: dataOfResult);
+  }
+
   Widget getBody(){
     var size = MediaQuery
         .of(context)
         .size;
-    final items = List.from(PlantData.PlanDataList);
+    // final items = List.from(widget.lstPlant);
     final plantList = List.from(PlantData.PlanDataList);
     final key = GlobalKey<AnimatedListState>();
 
@@ -87,9 +181,9 @@ class _HomePageState extends State<HomePage> {
                           child: AnimatedList(
                             scrollDirection: Axis.horizontal,
                             key: key,
-                            initialItemCount: items.length,
+                            initialItemCount: widget.lstPlant.length,
                             itemBuilder: (context, index, animation) =>
-                                buildItem(items[index], index, animation),
+                                buildItem(widget.lstPlant[index], index, animation),
                           ),
                         ),
                         InkWell(
@@ -107,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MainPage(title: 'Chọn cây trồng',)));
+                                builder: (context) => MainPage(title: 'Chọn cây trồng', items: widget.lstPlant,)));
                           },
                         )
                       ],
@@ -121,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
 
                   // borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
-                  color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : active == 5 ? Colors.orange[50] : Colors.grey[200]
+                    color: active == 1 ? Colors.teal[50] : active == 2 ? Colors.red[50] : active == 3 ? Colors.indigo[50] : active == 4 ? Colors.lime[50] : active == 5 ? Colors.orange[50] : Colors.grey[200]
                   // color: backColor
                 ),
                 child: Row(
@@ -167,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DiseasesInformation()),
+                          MaterialPageRoute(builder: (context) => DiseasesInformation(diseases: diseasesData,)),
                         );
                       },
                       child: Container(
@@ -308,7 +402,33 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 color: Colors.teal,
-                                onPressed: () => {},
+                                onPressed: () async {
+                                  await getImage();
+                                  final url = Uri.parse('http://ec2-44-203-161-33.compute-1.amazonaws.com:6868/predict');
+
+                                  // final url = Uri.parse('http://ec2-3-94-187-209.compute-1.amazonaws.com:6868/predict');
+
+                                  final response = await http.post(url, body: json.encode({'data' : base64str}));
+
+                                  final response2 = await http.get(url);
+
+                                  final decoded = json.decode(response2.body) as Map<String, dynamic>;
+
+                                  setState(() {
+                                    benh1st = decoded['benh1st'];
+                                    benh2nd = decoded['benh2nd'];
+                                    benh3rd = decoded['benh3rd'];
+                                    tile1 = decoded['tile1'];
+                                    tile2 = decoded['tile2'];
+                                    tile3 = decoded['tile3'];
+                                  });
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => resultPage(benh1st, benh2nd, benh3rd)),
+                                  );
+
+                                },
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                               ),
@@ -322,12 +442,64 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 color: Colors.teal,
-                                onPressed: () => {},
+                                onPressed: () async {
+                                  await getImage_camera();
+                                  // final url = Uri.parse('http://192.168.100.3:6868/predict');
+                                  final url = Uri.parse('http://ec2-44-203-161-33.compute-1.amazonaws.com:6868/predict');
+                                  // final url = Uri.parse('http://ec2-3-94-187-209.compute-1.amazonaws.com:6868/predict');
+
+                                  final response = await http.post(url, body: json.encode({'data' : base64str}));
+
+                                  final response2 = await http.get(url);
+
+                                  final decoded = json.decode(response2.body) as Map<String, dynamic>;
+
+                                  setState(() {
+                                    benh1st = decoded['benh1st'];
+                                    benh2nd = decoded['benh2nd'];
+                                    benh3rd = decoded['benh3rd'];
+                                    tile1 = decoded['tile1'];
+                                    tile2 = decoded['tile2'];
+                                    tile3 = decoded['tile3'];
+                                  });
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => resultPage(benh1st, benh2nd, benh3rd)),
+                                  );
+                                },
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                               ),
                             ],
                           ),
+                          // Row (
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: <Widget>[
+                          //     // Text(categories.length == 0 ? '' : categories[0].label +': '+(categories[0].score*100).toStringAsFixed(2),style: TextStyle(
+                          //     Text (benh1st + ': ' + tile1.toStringAsFixed(2),style: TextStyle(
+                          //         fontSize: 20,
+                          //         fontWeight: FontWeight.bold
+                          //     ),),
+                          //   ],),
+                          // Row (
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: <Widget>[
+                          //     // Text(categories.length == 0 ? '' : categories[0].label +': '+(categories[0].score*100).toStringAsFixed(2),style: TextStyle(
+                          //     Text (benh2nd + ': ' + tile2.toStringAsFixed(2),style: TextStyle(
+                          //         fontSize: 20,
+                          //         fontWeight: FontWeight.bold
+                          //     ),),
+                          //   ],),
+                          // Row (
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: <Widget>[
+                          //     // Text(categories.length == 0 ? '' : categories[0].label +': '+(categories[0].score*100).toStringAsFixed(2),style: TextStyle(
+                          //     Text (benh3rd + ': ' + tile3.toStringAsFixed(2),style: TextStyle(
+                          //         fontSize: 20,
+                          //         fontWeight: FontWeight.bold
+                          //     ),),
+                          //   ],),
                         ],
                       ),
                     )
@@ -370,82 +542,82 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 30,),
               Container(
-                padding: EdgeInsets.only(right: 20, left: 20),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text("Thư viện ảnh",style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold
-                        ),),
-                        SvgPicture.asset("assets/images/forward_icon.svg")
-                      ],),
-                    SizedBox(height: 10,),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => DiseasesInformation()));
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(image: AssetImage("assets/images/back.jpg"))
+                  padding: EdgeInsets.only(right: 20, left: 20),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("Thư viện ảnh",style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                          ),),
+                          SvgPicture.asset("assets/images/forward_icon.svg")
+                        ],),
+                      SizedBox(height: 10,),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => DiseasesInformation(diseases: diseasesData,)));
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(image: AssetImage("assets/images/back.jpg"))
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              width: (MediaQuery.of(context).size.width - 70) / 2,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(image: AssetImage("assets/images/duachuot-back.jpg"),fit: BoxFit.cover)
+                      SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                width: (MediaQuery.of(context).size.width - 70) / 2,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(image: AssetImage("assets/images/duachuot-back.jpg"),fit: BoxFit.cover)
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 20,),
-                            Container(
-                              width: (MediaQuery.of(context).size.width - 70) / 2,
-                              height: 230,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(image: AssetImage("assets/images/nho-back.jpg"),fit: BoxFit.cover)
+                              SizedBox(height: 20,),
+                              Container(
+                                width: (MediaQuery.of(context).size.width - 70) / 2,
+                                height: 230,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(image: AssetImage("assets/images/nho-back.jpg"),fit: BoxFit.cover)
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 20,),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              width: (MediaQuery.of(context).size.width - 70) / 2,
-                              height: 230,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(image: AssetImage("assets/images/cachua-back.jpg"),fit: BoxFit.cover)
+                            ],
+                          ),
+                          SizedBox(width: 20,),
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                width: (MediaQuery.of(context).size.width - 70) / 2,
+                                height: 230,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(image: AssetImage("assets/images/cachua-back.jpg"),fit: BoxFit.cover)
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 20,),
-                            Container(
-                              width: (MediaQuery.of(context).size.width - 70) / 2,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(image: AssetImage("assets/images/suongmai.jpg"),fit: BoxFit.cover)
+                              SizedBox(height: 20,),
+                              Container(
+                                width: (MediaQuery.of(context).size.width - 70) / 2,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(image: AssetImage("assets/images/suongmai.jpg"),fit: BoxFit.cover)
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  )
               ),
             ],
           ),
@@ -461,16 +633,16 @@ class _HomePageState extends State<HomePage> {
         // margin: const EdgeInsets.all(15.0),
         height: 160.0,
         decoration: BoxDecoration(
-            color: Colors.indigoAccent,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 1,
-                blurRadius: 4,
-                offset: Offset(0, 1), // changes position of shadow
-              ),
-            ],
+          color: Colors.indigoAccent,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: Offset(0, 1), // changes position of shadow
+            ),
+          ],
         ),
       ),
       ClipPath(
@@ -502,7 +674,7 @@ class _HomePageState extends State<HomePage> {
                               "${_weather.description.capitalizeFirstOfEach}",
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   color: Colors.white),
                             )),
                         Container(
@@ -557,7 +729,7 @@ class _HomePageState extends State<HomePage> {
     Weather? weather;
     String city = "Ha Noi";
     String apiKey = "e753b4f9ba0c7b3e498bca448bf37072";
-    var url = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric";
+    final url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric");
 
     final response = await http.get(url);
 
@@ -593,7 +765,6 @@ class Clipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(Clipper oldClipper) => false;
 }
-
 //
 // class Clipper2 extends CustomClipper<Path> {
 //   @override

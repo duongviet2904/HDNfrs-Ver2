@@ -3,6 +3,7 @@ import 'package:hdnfr_ver2/json/Diseases.dart';
 import 'detail.dart';
 
 class LandingPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
