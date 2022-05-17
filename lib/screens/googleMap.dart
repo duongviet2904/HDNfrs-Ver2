@@ -159,30 +159,6 @@ class MapSampleState extends State<MapSample> {
                 ),
               ),
             ),
-            // Positioned(
-            //   top: 10,
-            //   left: 10,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       InkWell(
-            //         onTap: (){
-            //           Navigator.pop(context);
-            //         },
-            //         child: OutlinedButton(
-            //           style: ElevatedButton.styleFrom(
-            //             side: BorderSide(width: 3.0, color: Colors.black),
-            //             shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(100.0),
-            //             ),
-            //           ),
-            //           onPressed: () {  },
-            //           child: new Icon(Icons.arrow_back, color: Colors.black,),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ));
   }
@@ -200,66 +176,4 @@ class MapSampleState extends State<MapSample> {
         bearing: 45.0,
         tilt: 45.0)));
   }
-  // Completer<GoogleMapController> _controller = Completer();
-  //
-  // static final CameraPosition _kGooglePlex = CameraPosition(
-  //   target: LatLng(21.05331297313505, 105.73502399378035),
-  //   zoom: 14.4746,
-  // );
-  //
-  // static final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(21.010894, 105.820097),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
-  //
-  // @override
-  // Widget build(BuildContext context) {
-  //   return new Scaffold(
-  //     body: Stack(
-  //       children: [
-  //         GoogleMap(
-  //           // mapType: MapType.hybrid,
-  //           initialCameraPosition: _kGooglePlex,
-  //           onMapCreated: (GoogleMapController controller) {
-  //             _controller.complete(controller);
-  //           },
-  //         ),
-  //         Positioned(
-  //           top: 10,
-  //           left: 10,
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               InkWell(
-  //                 onTap: (){
-  //                   Navigator.pop(context);
-  //                 },
-  //                 child: OutlinedButton(
-  //                   style: ElevatedButton.styleFrom(
-  //                     side: BorderSide(width: 3.0, color: Colors.black),
-  //                     shape: RoundedRectangleBorder(
-  //                       borderRadius: BorderRadius.circular(100.0),
-  //                     ),
-  //                   ),
-  //                   child: new Icon(Icons.arrow_back, color: Colors.black,),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //     floatingActionButton: FloatingActionButton.extended(
-  //       onPressed: _goToTheLake,
-  //       label: Text('To the Pharmacies!'),
-  //       icon: Icon(Icons.add_location_outlined),
-  //     ),
-  //   );
-  // }
-  //
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
 }

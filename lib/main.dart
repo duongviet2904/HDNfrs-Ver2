@@ -3,9 +3,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hdnfr_ver2/screens/choosing_plant.dart';
 import 'package:hdnfr_ver2/screens/home_page.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:hdnfr_ver2/screens/root.dart';
+
+import 'models/plant.dart';
 
 // void main() {
 //   runApp(
@@ -25,11 +28,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
+    final List<Plant> lstPlant = <Plant>[];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
           splash: 'assets/images/icons/hdnbanner.png',
-          nextScreen: RootApp(),
+          nextScreen: MainPage(title: 'Chọn cây trồng của bạn', items: lstPlant,),
           splashTransition: SplashTransition.fadeTransition,
           duration: 1000,
           splashIconSize: 300,

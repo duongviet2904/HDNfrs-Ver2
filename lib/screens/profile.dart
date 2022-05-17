@@ -10,6 +10,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "HDNfrs",
           style: TextStyle(
@@ -128,7 +129,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Text("Cùng nhau gieo trồng thông minh",
                               style: TextStyle(
-                                  fontSize: 18
+                                  fontSize: 17
                               ),
                             ),
                             SizedBox(height: 5,),
