@@ -93,6 +93,8 @@ class _HomePageState extends State<HomePage> {
     return array_string;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,6 +122,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
   Widget buildItem(item, int index, Animation<double> animation) =>
       HomePlantListWidget(
         item: item,
@@ -127,31 +130,46 @@ class _HomePageState extends State<HomePage> {
         onClicked: () => {active = item.id
         },
       );
-
   Widget resultPage(benh1st, benh2nd, benh3rd) {
     List<Disease> dataOfResult = [];
+    var rate = [];
     final diseasesData = List.from(DiseasesData.diseasesList);
     for(int i = 0; i < diseasesData.length; i++) {
       if (benh1st == diseasesData[i].name) {
         dataOfResult.add(diseasesData[i]);
+        rate.add(tile1);
         break;
       }
     }
     for (int i = 0; i < diseasesData.length; i++) {
       if (benh2nd == diseasesData[i].name) {
         dataOfResult.add(diseasesData[i]);
+        rate.add(tile2);
         break;
       }
     }
     for (int i = 0; i < diseasesData.length; i++) {
       if (benh3rd == diseasesData[i].name) {
         dataOfResult.add(diseasesData[i]);
+        rate.add(tile3);
         break;
       }
     }
 
-    if (tile1 >= 95.00) return ResultDetailPage(itemData: dataOfResult[0], diseases: dataOfResult,);
-    return ResultPage(diseases: dataOfResult);
+    if (tile1 >= 95.00) return ResultDetailPage(itemData: dataOfResult[0], diseases: dataOfResult, lstRate: rate, x: 0,);
+    else if(tile1 <= 30){
+        return AlertDialog(
+         title: Text("Thông báo"),
+         content: Text("Có khả năng chúng tôi chưa thể giải quyết vấn đề trên cây trồng của bạn ngay, vui lòng chụp bổ sung ảnh để đưa vào cuộc khảo sát cuối tháng"),
+          actions: [
+          ElevatedButton(
+          child: Text("Đóng"),
+              onPressed: (){
+        Navigator.of(context).pop(); // Return value
+        }
+        ),]);
+      }
+    return ResultPage(diseases: dataOfResult, lstRate: rate);
   }
 
   Widget getBody(){

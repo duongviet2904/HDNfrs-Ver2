@@ -6,8 +6,9 @@ import 'package:hdnfr_ver2/screens/result_page.dart';
 class ResultDetailPage extends StatelessWidget {
   final Disease itemData;
   final List<Disease> diseases;
-
-  const ResultDetailPage({Key? key,required this.itemData, required this.diseases}) : super(key: key);
+  final lstRate;
+  final int x;
+  const ResultDetailPage({Key? key,required this.itemData, required this.diseases,required this.lstRate, required this.x}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class ResultDetailPage extends StatelessWidget {
             onPressed: () => {
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ResultPage(diseases: diseases)),
+              MaterialPageRoute(builder: (context) => ResultPage(diseases: diseases, lstRate: lstRate,)),
               )
             },
           ),
@@ -45,7 +46,7 @@ class ResultDetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(itemData.vname, style:
+                        Text(itemData.vname + " (" + lstRate[x].toStringAsFixed(2)  + "%)", style:
                         TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30)
                           ,),
                         SizedBox(height: 30,),

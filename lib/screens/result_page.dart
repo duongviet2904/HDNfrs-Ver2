@@ -7,9 +7,10 @@ import 'detail.dart';
 class ResultPage extends StatelessWidget {
 
   final List<Disease> diseases;
-
+  final lstRate;
   const ResultPage({
     required this.diseases,
+    required this.lstRate,
     Key? key,
   }) : super(key: key);
 
@@ -48,7 +49,7 @@ class ResultPage extends StatelessWidget {
                         itemCount: diseases.length,
                         itemBuilder: (context, index) {
                           return RealEstateItem(
-                            itemData: diseases[index], diseases: diseases,
+                            itemData: diseases[index], diseases: diseases,lstRate: lstRate,x: index,
                           );
                         }),
                   ),
@@ -65,8 +66,9 @@ class ResultPage extends StatelessWidget {
 class RealEstateItem extends StatelessWidget {
   final Disease itemData;
   final List<Disease> diseases;
-
-  const RealEstateItem({Key? key, required this.itemData, required this.diseases}) : super(key: key);
+  final lstRate;
+  final int x;
+  const RealEstateItem({Key? key, required this.itemData, required this.diseases,required this.lstRate,required this.x}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,8 @@ class RealEstateItem extends StatelessWidget {
             builder: (context) => ResultDetailPage(
                 itemData: itemData,
                 diseases: diseases,
+                lstRate: lstRate,
+                x: x,
             )));
       },
       child: Container(
@@ -107,7 +111,7 @@ class RealEstateItem extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text(itemData.name,style: TextStyle(
+                                      Text(itemData.name + " (" + lstRate[x].toStringAsFixed(2) + "%)",style: TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold
                                       ),),
