@@ -124,7 +124,8 @@ class _HomePageState extends State<HomePage> {
       HomePlantListWidget(
         item: item,
         lstPlant: widget.lstPlant,
-        onClicked: () => {active = item.id},
+        onClicked: () => {active = item.id
+        },
       );
 
   Widget resultPage(benh1st, benh2nd, benh3rd) {
@@ -404,8 +405,8 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.teal,
                                 onPressed: () async {
                                   await getImage();
-                                  final url = Uri.parse('http://ec2-44-203-161-33.compute-1.amazonaws.com:6868/predict');
-
+                                  // final url = Uri.parse('http://ec2-44-203-161-33.compute-1.amazonaws.com:6868/predict');
+                                  final url = Uri.parse('http://ec2-122-248-216-18.ap-southeast-1.compute.amazonaws.com:6868/predict');
                                   // final url = Uri.parse('http://ec2-3-94-187-209.compute-1.amazonaws.com:6868/predict');
 
                                   final response = await http.post(url, body: json.encode({'data' : base64str}));
@@ -445,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () async {
                                   await getImage_camera();
                                   // final url = Uri.parse('http://192.168.100.3:6868/predict');
-                                  final url = Uri.parse('http://ec2-44-203-161-33.compute-1.amazonaws.com:6868/predict');
+                                  final url = Uri.parse('http://ec2-122-248-216-18.ap-southeast-1.compute.amazonaws.com:6868/predict');
                                   // final url = Uri.parse('http://ec2-3-94-187-209.compute-1.amazonaws.com:6868/predict');
 
                                   final response = await http.post(url, body: json.encode({'data' : base64str}));

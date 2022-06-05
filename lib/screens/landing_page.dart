@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hdnfr_ver2/json/Diseases.dart';
+import '../diseasesData.dart';
 import 'detail.dart';
 
 class LandingPage extends StatelessWidget {
@@ -36,10 +37,10 @@ class LandingPage extends StatelessWidget {
                     padding: sidePadding,
                     child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: RE_DATA.length,
+                        itemCount: DiseasesData.diseasesList.length,
                         itemBuilder: (context, index) {
                           return RealEstateItem(
-                            itemData: RE_DATA[index],
+                            itemData: DiseasesData.diseasesList[index],
                           );
                         }),
                   ),
@@ -187,9 +188,9 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   void initState() {
     super.initState();
 
-    if (widget.text.length > 50) {
-      firstHalf = widget.text.substring(0, 50);
-      secondHalf = widget.text.substring(50, widget.text.length);
+    if (widget.text.length > 40) {
+      firstHalf = widget.text.substring(0, 40);
+      secondHalf = widget.text.substring(40, widget.text.length);
     } else {
       firstHalf = widget.text;
       secondHalf = "";

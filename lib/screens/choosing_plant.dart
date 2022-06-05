@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
       actions: [
         FlatButton (
           child: Text(
-            "Lưu",
+            "Bắt đầu",
             style: TextStyle(
                 fontSize: 18
             ),
@@ -85,7 +85,7 @@ class _MainPageState extends State<MainPage> {
             child: Text(
               "Các cây trồng đã chọn:",
               style: TextStyle(
-                fontSize: 18
+                  fontSize: 18
               ),
             ),
           ),
